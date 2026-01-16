@@ -1,0 +1,15 @@
+D:\MyNet\src\MyNet.Application\bin\Debug\net10.0\MyNet.Application.deps.json
+D:\MyNet\src\MyNet.Application\bin\Debug\net10.0\MyNet.Application.dll
+D:\MyNet\src\MyNet.Application\bin\Debug\net10.0\MyNet.Application.pdb
+D:\MyNet\src\MyNet.Application\bin\Debug\net10.0\MyNet.Domain.dll
+D:\MyNet\src\MyNet.Application\bin\Debug\net10.0\MyNet.Domain.pdb
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.csproj.AssemblyReference.cache
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.AssemblyInfoInputs.cache
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.AssemblyInfo.cs
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.csproj.CoreCompileInputs.cache
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Ap.B9A61D9F.Up2Date
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.dll
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\refint\MyNet.Application.dll
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.pdb
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\ref\MyNet.Application.dll

@@ -1,0 +1,220 @@
+2026-01-15 16:32:27.114 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:42:30.451 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:42:41.175 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:42:53.511 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:42:53.856 +07:00 [ERR] An error occurred using the connection to database 'mynet_db' on server 'tcp://localhost:5432'.
+2026-01-15 16:42:53.860 +07:00 [ERR] An error occurred while seeding the database.
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "dev"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.HistoryRepository.GetAppliedMigrationsAsync(CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlHistoryRepository.GetAppliedMigrationsAsync(CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at MyNet.Infrastructure.Extensions.DatabaseSeeder.SeedDatabaseAsync(IServiceProvider serviceProvider) in D:\MyNet\src\MyNet.Infrastructure\Extensions\DatabaseSeeder.cs:line 25
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "dev"
+    File: auth.c
+    Line: 331
+    Routine: auth_failed
+2026-01-15 16:45:09.028 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:45:09.338 +07:00 [ERR] Failed executing DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-01-15 16:45:09.483 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 16:45:09.802 +07:00 [ERR] Failed executing DbCommand (26ms) [Parameters=[@normalizedName='ADMIN'], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."ConcurrencyStamp", r."CreatedAt", r."Description", r."Name", r."NormalizedName"
+FROM "Roles" AS r
+WHERE r."NormalizedName" = @normalizedName
+LIMIT 1
+2026-01-15 16:45:09.812 +07:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MyNet.Infrastructure.Persistences.AppDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Roles" does not exist
+
+POSITION: 105
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Roles" does not exist
+    Position: 105
+    File: parse_relation.c
+    Line: 1449
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "Roles" does not exist
+
+POSITION: 105
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Roles" does not exist
+    Position: 105
+    File: parse_relation.c
+    Line: 1449
+    Routine: parserOpenTable
+2026-01-15 16:45:09.814 +07:00 [ERR] An error occurred while seeding the database.
+Npgsql.PostgresException (0x80004005): 42P01: relation "Roles" does not exist
+
+POSITION: 105
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.RoleExistsAsync(String roleName)
+   at MyNet.Infrastructure.Extensions.DatabaseSeeder.SeedRolesAsync(RoleManager`1 roleManager, ILogger logger) in D:\MyNet\src\MyNet.Infrastructure\Extensions\DatabaseSeeder.cs:line 53
+   at MyNet.Infrastructure.Extensions.DatabaseSeeder.SeedDatabaseAsync(IServiceProvider serviceProvider) in D:\MyNet\src\MyNet.Infrastructure\Extensions\DatabaseSeeder.cs:line 29
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "Roles" does not exist
+    Position: 105
+    File: parse_relation.c
+    Line: 1449
+    Routine: parserOpenTable
+2026-01-15 16:45:28.384 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:45:38.620 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:45:39.273 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 16:45:39.685 +07:00 [INF] Created role: Admin
+2026-01-15 16:45:39.693 +07:00 [INF] Created role: User
+2026-01-15 16:45:39.715 +07:00 [WRN] Failed to create admin user: Passwords must have at least one lowercase ('a'-'z').
+2026-01-15 16:45:39.715 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 16:48:08.562 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:48:09.061 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 16:48:09.642 +07:00 [INF] Created admin user: admin
+2026-01-15 16:48:09.643 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 16:57:18.209 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:57:28.589 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:58:01.926 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 16:58:02.483 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 16:58:02.822 +07:00 [INF] Admin user already exists.
+2026-01-15 16:58:02.954 +07:00 [INF] Seeded 2 functions.
+2026-01-15 16:58:03.005 +07:00 [INF] Seeded 8 permissions for Admin role.
+2026-01-15 16:58:03.005 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:00:18.472 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:00:18.982 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:00:19.326 +07:00 [INF] Admin user already exists.
+2026-01-15 17:00:19.376 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:05:04.746 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:05:05.254 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:05:05.595 +07:00 [INF] Admin user already exists.
+2026-01-15 17:05:05.754 +07:00 [INF] Seeded 2 functions.
+2026-01-15 17:05:05.811 +07:00 [INF] Seeded 8 permissions for Admin role.
+2026-01-15 17:05:05.811 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:29:12.042 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:29:12.563 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:29:12.927 +07:00 [INF] Admin user already exists.
+2026-01-15 17:29:13.083 +07:00 [INF] Removed 2 deprecated functions (USER,ROLE).
+2026-01-15 17:29:13.102 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:35:20.527 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:35:30.952 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:35:31.442 +07:00 [ERR] Failed executing DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Functions_Code" ON "Functions" ("Code");
+2026-01-15 17:36:09.154 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:36:13.907 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:36:14.161 +07:00 [ERR] An error occurred using the connection to database 'mynet_db' on server 'tcp://localhost:5432'.
+2026-01-15 17:36:17.958 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:36:18.465 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:36:18.851 +07:00 [INF] Created role: Admin
+2026-01-15 17:36:18.859 +07:00 [INF] Created role: User
+2026-01-15 17:36:19.008 +07:00 [INF] Created admin user: admin
+2026-01-15 17:36:19.085 +07:00 [INF] Assigned 'Admin' role to user 'admin'
+2026-01-15 17:36:19.132 +07:00 [INF] Seeded 2 functions.
+2026-01-15 17:36:19.186 +07:00 [INF] Seeded 8 permissions for Admin role.
+2026-01-15 17:36:19.186 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:38:27.404 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:38:35.943 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:38:36.198 +07:00 [ERR] An error occurred using the connection to database 'mynet_db' on server 'tcp://localhost:5432'.
+2026-01-15 17:38:45.271 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:38:56.678 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:38:56.926 +07:00 [ERR] An error occurred using the connection to database 'mynet_db' on server 'tcp://localhost:5432'.
+2026-01-15 17:39:06.497 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:39:07.013 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:39:07.397 +07:00 [INF] Created role: Admin
+2026-01-15 17:39:07.406 +07:00 [INF] Created role: User
+2026-01-15 17:39:07.548 +07:00 [INF] Created admin user: admin
+2026-01-15 17:39:07.611 +07:00 [INF] Assigned 'Admin' role to user 'admin'
+2026-01-15 17:39:07.660 +07:00 [INF] Seeded 2 functions.
+2026-01-15 17:39:07.717 +07:00 [INF] Seeded 8 permissions for Admin role.
+2026-01-15 17:39:07.717 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:50:33.918 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:50:33.945 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:50:46.445 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:50:46.472 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:50:54.800 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:50:54.831 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:50:55.060 +07:00 [ERR] An error occurred using the connection to database 'mynet_db' on server 'tcp://localhost:5432'.
+2026-01-15 17:50:55.825 +07:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Users" ALTER COLUMN "LastModifiedBy" TYPE integer;
+2026-01-15 17:51:14.228 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:51:14.254 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:51:23.148 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:51:23.175 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:51:35.606 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:51:35.633 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:51:35.866 +07:00 [ERR] An error occurred using the connection to database 'mynet_db' on server 'tcp://localhost:5432'.
+2026-01-15 17:51:39.735 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:51:39.762 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:51:40.253 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:51:40.689 +07:00 [INF] Created role: Admin
+2026-01-15 17:51:40.698 +07:00 [INF] Created role: User
+2026-01-15 17:51:40.837 +07:00 [INF] Created admin user: admin
+2026-01-15 17:51:40.900 +07:00 [INF] Assigned 'Admin' role to user 'admin'
+2026-01-15 17:51:40.962 +07:00 [INF] Seeded 2 functions.
+2026-01-15 17:51:41.023 +07:00 [INF] Seeded 8 permissions for Admin role.
+2026-01-15 17:51:41.024 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 17:58:56.433 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 17:58:56.460 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 17:58:56.955 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 17:58:57.325 +07:00 [INF] Admin user already exists.
+2026-01-15 17:58:57.418 +07:00 [INF] Database seeding completed successfully.
+2026-01-15 18:03:47.385 +07:00 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-01-15 18:03:47.413 +07:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2026-01-15 18:03:47.975 +07:00 [INF] Database migrations applied successfully.
+2026-01-15 18:03:48.359 +07:00 [INF] Admin user already exists.
+2026-01-15 18:03:48.455 +07:00 [INF] Database seeding completed successfully.

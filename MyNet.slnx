@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MyNet.API/MyNet.API.csproj" />
+    <Project Path="src/MyNet.Application/MyNet.Application.csproj" />
+    <Project Path="src/MyNet.Domain/MyNet.Domain.csproj" />
+    <Project Path="src/MyNet.Infrastructure/MyNet.Infrastructure.csproj" />
+  </Folder>
+</Solution>

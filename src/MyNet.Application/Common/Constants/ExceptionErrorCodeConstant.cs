@@ -1,0 +1,24 @@
+namespace MyNet.Application.Common.Constants
+{
+    public static class ExceptionErrorCodeConstant
+    {
+        public const string ERROR_ENTITY_NOTFOUND = "ERROR_ENTITY_NOTFOUND";
+        public const string ERROR_ENTITY_DUPLICATE = "ERROR_ENTITY_DUPLICATE";
+        public const string ERROR_ENTITY_CONCURRENCY = "ERROR_ENTITY_CONCURRENCY";
+        public const string ERROR_ENTITY_VALIDATION = "ERROR_ENTITY_VALIDATION";
+        public const string ERROR_SYSTEM_SECURITY_EXCEPTION = "ERROR.SYSTEM.SECURITY_EXCEPTION";
+        public const string ERROR_BAD_REQUEST_EXCEPTION = "ERROR.BAD_REQUEST.EXCEPTION";
+        public const string ERROR_GENERIC_COMMON_EXCEPTION = "ERROR.GENERIC.COMMON_EXCEPTION";
+
+        public static class ExceptionDetailCodeConst
+        {
+            public const string ERROR_VALIDATION_REQUIRED = "ERROR.ENTITY.VALIDATION.FIELD_REQUIRED";
+            public const string ERROR_VALIDATION_NOT_FOUND = "ERROR.ENTITY.VALIDATION.FIELD_NOT_FOUND";
+            public const string ERROR_ENTITY_VALIDATION_MAX_LENGTH = "ERROR.ENTITY.VALIDATION.MAX_LENGTH";
+            public const string ERROR_VALIDATION_INVALID_DATE_FORMAT = "ERROR.VALIDATION.INVALID_DATE_FORMAT";
+            public const string ERROR_VALIDATION_INVALID_TIME_RANGE = "ERROR.VALIDATION.INVALID_TIME_RANGE";
+            public const string ERROR_VALIDATION_INVALID_TIME_RANGE_MAX_HOURS = "ERROR.VALIDATION.INVALID_TIME_RANGE_MAX_HOURS";
+            public const string ERROR_VALIDATION_INVALID_TIME_RANGE_MIN_HOURS = "ERROR.VALIDATION.INVALID_TIME_RANGE_MIN_HOURS";
+        }
+    }
+}
