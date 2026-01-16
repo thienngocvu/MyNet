@@ -5,17 +5,17 @@ using MyNet.Domain.Entities;
 namespace MyNet.Infrastructure.Persistences.Configurations
 {
     /// <summary>
-    /// User entity configuration for ASP.NET Identity User
+    /// Role entity configuration for ASP.NET Identity Role
     /// Note: Basic Identity columns are configured by IdentityDbContext
     /// This adds custom property mappings
     /// </summary>
-    public class UserConfiguration : AuditableEntityConfiguration<User>
+    public class RoleConfiguration : AuditableEntityConfiguration<Role>
     {
-        public override void Configure(EntityTypeBuilder<User> builder)
+        public override void Configure(EntityTypeBuilder<Role> builder)
         {
             base.Configure(builder);
             
-            builder.Property(e => e.IsActive).HasDefaultValue(true);
+            builder.Property(r => r.Description).HasMaxLength(500);
         }
     }
 }

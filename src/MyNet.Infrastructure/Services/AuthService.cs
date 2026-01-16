@@ -14,7 +14,7 @@ namespace MyNet.Infrastructure.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddLoginLogAsync(string userId, string remoteAddress, LoginResultEnum loginResult)
+        public async Task AddLoginLogAsync(int userId, string remoteAddress, LoginResultEnum loginResult)
         {
             var entity = new LoginLog()
             {

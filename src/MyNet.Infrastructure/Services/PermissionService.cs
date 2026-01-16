@@ -57,7 +57,17 @@ namespace MyNet.Infrastructure.Services
             return perms.Select(p => new MyNet.Application.DTOs.PermissionDto
                 {
                     FunctionId = p.FunctionId,
-                    ActionId = p.ActionId
+                    Actions = new MyNet.Application.DTOs.PermissionActionsDto
+                    {
+                        List = p.Actions.List,
+                        Read = p.Actions.Read,
+                        Create = p.Actions.Create,
+                        Update = p.Actions.Update,
+                        Delete = p.Actions.Delete,
+                        Approve = p.Actions.Approve,
+                        Export = p.Actions.Export,
+                        Import = p.Actions.Import
+                    }
                 })
                 .ToList();
         }
@@ -77,7 +87,17 @@ namespace MyNet.Infrastructure.Services
                     {
                         RoleId = request.RoleId,
                         FunctionId = p.FunctionId,
-                        ActionId = p.ActionId
+                        Actions = new MyNet.Domain.Entities.PermissionActions
+                        {
+                            List = p.Actions.List,
+                            Read = p.Actions.Read,
+                            Create = p.Actions.Create,
+                            Update = p.Actions.Update,
+                            Delete = p.Actions.Delete,
+                            Approve = p.Actions.Approve,
+                            Export = p.Actions.Export,
+                            Import = p.Actions.Import
+                        }
                     }).ToList();
                     
                     await _unitOfWork.Permissions.AddRangeAsync(newPermissions);

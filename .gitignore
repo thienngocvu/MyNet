@@ -1,0 +1,153 @@
+# .NET build output
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Code coverage
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage/
+
+# NCrunch
+*.ncrunchproject
+*.ncrunchsolution
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Chutzpah
+_chutzpah*
+
+# Benchmark
+BenchmarkDotNet.Artifacts/
+
+# Project specific
+*.log
+*.swp
+*.bak
+*.tmp
+*.temp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+
+# Database
+*.mdf
+*.ldf
+*.ndf
+
+# Secrets
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+*.pfx
+*.p12
+
+# Entity Framework
+**/Migrations/*.Designer.cs
+
+# Publish profiles
+*.pubxml
+!**/PublishProfiles/*.pubxml
+*.publishproj
+
+# Docker
+.docker/
+
+# Misc
+*.pidb
+*.svclog
+*.scc
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+
+# Web
+node_modules/
+wwwroot/lib/
+
+# Stylecop
+StyleCopReport.xml
+
+# DocFX
+_site/
+api/
+docs/
+
+# Backup & Local
+*.orig
+*.bak
+local.settings.json
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Azure
+.azure/

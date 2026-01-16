@@ -50,14 +50,14 @@ namespace MyNet.API.Controllers
                 var user = await _userManager.FindByNameAsync(request.Username);
                 if (user == null)
                 {
-                    await _authService.AddLoginLogAsync(request.Username, GetClientIp(), LoginResultEnum.LOGIN_FAILED);
+                    // Cannot log failed attempt without userId - user doesn't exist
                     return Unauthorized(new { message = "Invalid username or password" });
                 }
 
                 var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
                 if (!result.Succeeded)
                 {
-                    await _authService.AddLoginLogAsync(request.Username, GetClientIp(), LoginResultEnum.LOGIN_FAILED);
+                    await _authService.AddLoginLogAsync(user.Id, GetClientIp(), LoginResultEnum.LOGIN_FAILED);
                     return Unauthorized(new { message = "Invalid username or password" });
                 }
 
@@ -73,7 +73,7 @@ namespace MyNet.API.Controllers
                 await _refreshTokenRepository.AddAsync(refreshToken);
                 await _refreshTokenRepository.SaveChangesAsync();
 
-                await _authService.AddLoginLogAsync(user.Id.ToString(), GetClientIp(), LoginResultEnum.LOGIN_SUCCESSFULLY);
+                await _authService.AddLoginLogAsync(user.Id, GetClientIp(), LoginResultEnum.LOGIN_SUCCESSFULLY);
 
                 return Ok(new LoginResponse
                 {
@@ -85,7 +85,7 @@ namespace MyNet.API.Controllers
             }
             catch (Exception)
             {
-                await _authService.AddLoginLogAsync(request.Username, GetClientIp(), LoginResultEnum.LOGIN_FAILED);
+                // Cannot log failed attempt without userId in exception handler
                 return StatusCode(500, new { message = "An error occurred during login" });
             }
         }

@@ -10,3 +10,4 @@ D:\MyNet\src\MyNet.Domain\obj\Debug\net10.0\MyNet.Domain.dll
 D:\MyNet\src\MyNet.Domain\obj\Debug\net10.0\refint\MyNet.Domain.dll
 D:\MyNet\src\MyNet.Domain\obj\Debug\net10.0\MyNet.Domain.pdb
 D:\MyNet\src\MyNet.Domain\obj\Debug\net10.0\ref\MyNet.Domain.dll
+D:\MyNet\src\MyNet.Domain\obj\Debug\net10.0\MyNet.Domain.sourcelink.json

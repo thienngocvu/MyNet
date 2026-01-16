@@ -14,6 +14,11 @@ namespace MyNet.Infrastructure.Persistences.Configurations
             builder.Property(f => f.Id).HasMaxLength(50);
             
             builder.Property(f => f.Code).IsRequired().HasMaxLength(50);
+            builder.Property(f => f.Name).IsRequired().HasMaxLength(100);
+            builder.Property(f => f.ParentId).HasMaxLength(50);
+            builder.Property(f => f.Url).HasMaxLength(50);
+            builder.Property(f => f.Icon).HasMaxLength(50);
+            
             builder.HasIndex(f => f.Code).IsUnique();
 
             // Self-referencing relationship for hierarchy

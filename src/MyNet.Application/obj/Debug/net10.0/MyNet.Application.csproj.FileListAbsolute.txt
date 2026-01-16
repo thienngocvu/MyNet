@@ -13,3 +13,4 @@ D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.dll
 D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\refint\MyNet.Application.dll
 D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.pdb
 D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\ref\MyNet.Application.dll
+D:\MyNet\src\MyNet.Application\obj\Debug\net10.0\MyNet.Application.sourcelink.json

@@ -16,6 +16,8 @@ namespace MyNet.Domain.Entities
         public DateTime? DeletedAt { get; set; }
         public int? DeletedBy { get; set; }
 
-        public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
+        // Navigation properties
+        public virtual ICollection<UserRole> UserRoles { get; set; } = [];
+        public virtual ICollection<Permission> Permissions { get; set; } = [];
     }
 }

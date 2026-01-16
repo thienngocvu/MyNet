@@ -4,17 +4,16 @@ using MyNet.Domain.Interfaces;
 namespace MyNet.Domain.Entities
 {
     /// <summary>
-    /// Application User entity inheriting from IdentityUser with custom properties
+    /// Junction table for User-Role many-to-many relationship
+    /// Inherits from IdentityUserRole to integrate with ASP.NET Identity
     /// </summary>
-    public class User : IdentityUser<int>, IEntity<int>, IAuditableEntity
+    public class UserRole : IdentityUserRole<int>, IAuditableEntity
     {
-        
         // Audit fields
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public int? CreatedBy { get; set; }
         public DateTime? LastModifiedAt { get; set; }
         public int? LastModifiedBy { get; set; }
-        public bool IsActive { get; set; } = true;
         
         // Soft delete fields
         public bool IsDeleted { get; set; }
@@ -22,7 +21,7 @@ namespace MyNet.Domain.Entities
         public int? DeletedBy { get; set; }
         
         // Navigation properties
-        public virtual ICollection<UserRole> UserRoles { get; set; } = [];
-        public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = [];
+        public virtual User User { get; set; } = null!;
+        public virtual Role Role { get; set; } = null!;
     }
 }

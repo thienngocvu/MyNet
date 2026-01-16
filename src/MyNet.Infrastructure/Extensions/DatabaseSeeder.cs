@@ -128,36 +128,28 @@ namespace MyNet.Infrastructure.Extensions
                 logger.LogInformation($"Seeded {functions.Length} functions.");
             }
 
-            // 2. Seed Permissions for Admin
+            // 2. Seed Permissions for Admin (all permissions enabled)
             var adminRole = await roleManager.FindByNameAsync("Admin");
             if (adminRole != null)
             {
-                var actions = new[] { "VIEW", "CREATE", "UPDATE", "DELETE" };
-                var permissions = new List<Permission>();
                 var allFunctions = await context.Functions.ToListAsync();
 
                 foreach (var func in allFunctions)
                 {
-                    foreach (var action in actions)
+                    if (!await context.Permissions.AnyAsync(p => p.RoleId == adminRole.Id && p.FunctionId == func.Id))
                     {
-                        if (!await context.Permissions.AnyAsync(p => p.RoleId == adminRole.Id && p.FunctionId == func.Id && p.ActionId == action))
+                        var permission = new Permission
                         {
-                            permissions.Add(new Permission
-                            {
-                                RoleId = adminRole.Id,
-                                FunctionId = func.Id,
-                                ActionId = action
-                            });
-                        }
+                            RoleId = adminRole.Id,
+                            FunctionId = func.Id,
+                            Actions = PermissionActions.All // Grant all permissions to Admin
+                        };
+                        await context.Permissions.AddAsync(permission);
                     }
                 }
 
-                if (permissions.Any())
-                {
-                    await context.Permissions.AddRangeAsync(permissions);
-                    await context.SaveChangesAsync();
-                    logger.LogInformation($"Seeded {permissions.Count} permissions for Admin role.");
-                }
+                await context.SaveChangesAsync();
+                logger.LogInformation($"Seeded permissions for Admin role.");
             }
         }
     }

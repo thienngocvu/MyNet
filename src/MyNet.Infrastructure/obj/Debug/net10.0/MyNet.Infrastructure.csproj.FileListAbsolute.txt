@@ -17,3 +17,4 @@ D:\MyNet\src\MyNet.Infrastructure\obj\Debug\net10.0\refint\MyNet.Infrastructure.
 D:\MyNet\src\MyNet.Infrastructure\obj\Debug\net10.0\MyNet.Infrastructure.pdb
 D:\MyNet\src\MyNet.Infrastructure\obj\Debug\net10.0\MyNet.Infrastructure.genruntimeconfig.cache
 D:\MyNet\src\MyNet.Infrastructure\obj\Debug\net10.0\ref\MyNet.Infrastructure.dll
+D:\MyNet\src\MyNet.Infrastructure\obj\Debug\net10.0\MyNet.Infrastructure.sourcelink.json

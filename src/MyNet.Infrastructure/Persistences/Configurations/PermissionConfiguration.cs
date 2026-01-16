@@ -12,8 +12,16 @@ namespace MyNet.Infrastructure.Persistences.Configurations
             
             builder.ToTable("Permissions");
             
-            // Unique Index for business key
-            builder.HasIndex(p => new { p.RoleId, p.FunctionId, p.ActionId }).IsUnique();
+            builder.Property(p => p.FunctionId).IsRequired().HasMaxLength(50);
+            
+            // Configure Actions as JSONB column in PostgreSQL
+            builder.OwnsOne(p => p.Actions, actionsBuilder =>
+            {
+                actionsBuilder.ToJson("Actions");
+            });
+            
+            // Unique Index: One permission record per Role-Function combination
+            builder.HasIndex(p => new { p.RoleId, p.FunctionId }).IsUnique();
 
             // Relationships
             builder.HasOne(p => p.Role)

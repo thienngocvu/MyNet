@@ -1,10 +1,16 @@
 namespace MyNet.Domain.Entities
 {
-    public class LoginLog
+    /// <summary>
+    /// Login log entity to track user login attempts
+    /// </summary>
+    public class LoginLog : BaseEntity<int>
     {
-        public required string UserId { get; set; }
+        public int UserId { get; set; }
         public DateTime LoginDate { get; set; }
-        public required string RemoteAddress { get; set; }
-        public short LoginResult { get;set; }
+        public string RemoteAddress { get; set; } = null!;
+        public short LoginResult { get; set; } // 0: Failed, 1: Success
+        
+        // Navigation property
+        public virtual User User { get; set; } = null!;
     }
 }

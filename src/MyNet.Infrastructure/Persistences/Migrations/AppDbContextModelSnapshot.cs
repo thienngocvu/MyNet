@@ -102,11 +102,18 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("character varying(21)");
+
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<int>");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -192,6 +199,32 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                     b.ToTable("Functions", (string)null);
                 });
 
+            modelBuilder.Entity("MyNet.Domain.Entities.LoginLog", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("LoginDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<short>("LoginResult")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("RemoteAddress")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("UserId", "LoginDate");
+
+                    b.HasIndex("LoginDate");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LoginLogs", (string)null);
+                });
+
             modelBuilder.Entity("MyNet.Domain.Entities.Permission", b =>
                 {
                     b.Property<int>("Id")
@@ -199,11 +232,6 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ActionId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -240,7 +268,7 @@ namespace MyNet.Infrastructure.Persistences.Migrations
 
                     b.HasIndex("FunctionId");
 
-                    b.HasIndex("RoleId", "FunctionId", "ActionId")
+                    b.HasIndex("RoleId", "FunctionId")
                         .IsUnique();
 
                     b.ToTable("Permissions", (string)null);
@@ -261,7 +289,8 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("CreatedByIp")
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
@@ -273,7 +302,9 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("timestamp with time zone");
@@ -282,13 +313,15 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ReplacedByToken")
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<DateTime?>("RevokedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("RevokedByIp")
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Token")
                         .IsRequired()
@@ -305,7 +338,7 @@ namespace MyNet.Infrastructure.Persistences.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens");
+                    b.ToTable("RefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("MyNet.Domain.Entities.Role", b =>
@@ -333,10 +366,13 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("timestamp with time zone");
@@ -456,6 +492,38 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("MyNet.Domain.Entities.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("LastModifiedBy")
+                        .HasColumnType("integer");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasDiscriminator().HasValue("UserRole");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("MyNet.Domain.Entities.Role", null)
@@ -476,21 +544,6 @@ namespace MyNet.Infrastructure.Persistences.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("MyNet.Domain.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("MyNet.Domain.Entities.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MyNet.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -531,6 +584,41 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.OwnsOne("MyNet.Domain.Entities.PermissionActions", "Actions", b1 =>
+                        {
+                            b1.Property<int>("PermissionId");
+
+                            b1.Property<bool>("Approve");
+
+                            b1.Property<bool>("Create");
+
+                            b1.Property<bool>("Delete");
+
+                            b1.Property<bool>("Export");
+
+                            b1.Property<bool>("Import");
+
+                            b1.Property<bool>("List");
+
+                            b1.Property<bool>("Read");
+
+                            b1.Property<bool>("Update");
+
+                            b1.HasKey("PermissionId");
+
+                            b1.ToTable("Permissions");
+
+                            b1
+                                .ToJson("Actions")
+                                .HasColumnType("jsonb");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PermissionId");
+                        });
+
+                    b.Navigation("Actions")
+                        .IsRequired();
+
                     b.Navigation("Function");
 
                     b.Navigation("Role");
@@ -547,6 +635,25 @@ namespace MyNet.Infrastructure.Persistences.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MyNet.Domain.Entities.UserRole", b =>
+                {
+                    b.HasOne("MyNet.Domain.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyNet.Domain.Entities.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MyNet.Domain.Entities.Function", b =>
                 {
                     b.Navigation("Children");
@@ -557,11 +664,15 @@ namespace MyNet.Infrastructure.Persistences.Migrations
             modelBuilder.Entity("MyNet.Domain.Entities.Role", b =>
                 {
                     b.Navigation("Permissions");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("MyNet.Domain.Entities.User", b =>
                 {
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }
